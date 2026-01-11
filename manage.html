@@ -1,0 +1,9 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Manage Expenses - Budget Tracker</title><link rel="stylesheet" href="css/styles.css" /></head><body>
+<header class="topbar"><div class="brand">Budget Tracker</div><nav><a href="index.html">Home</a><a href="manage.html" class="active">Manage Expenses</a><a href="goals.html">Budget Goals</a><a href="reports.html">Insights</a></nav></header>
+<main class="single container"><div class="card"><h1>Manage Expenses</h1><p>Review and edit your transactions below. Click a delete button to remove.</p><div id="manageList"></div></div></main><footer class="footer small"><p>© 2025 Budget Tracker</p></footer>
+<script>
+const LS_KEY='budget_tracker_final_v1';
+function loadState(){ try{ return JSON.parse(localStorage.getItem(LS_KEY)) || {transactions:[]} }catch(e){return {transactions:[]}} }
+function renderManage(){ const s = loadState(); const wrap = document.getElementById('manageList'); if(!wrap) return; if(!s.transactions.length){ wrap.innerHTML='<em>No transactions yet</em>'; return } let html = '<table class=\"manage\"><tr><th>Type</th><th>Category</th><th>Amount</th><th>Date</th><th>Action</th></tr>'; for(const t of s.transactions){ html += '<tr><td>'+t.type+'</td><td>'+t.category+'</td><td>₹'+t.amount.toFixed(2)+'</td><td>'+new Date(t.ts).toLocaleString()+'</td><td><button data-id=\"'+t.id+'\" class=\"del\">Delete</button></td></tr>'; } html += '</table>'; wrap.innerHTML = html; document.querySelectorAll('.del').forEach(b=>b.addEventListener('click', e=>{ const id = e.target.getAttribute('data-id'); if(confirm('Delete transaction?')){ s.transactions = s.transactions.filter(x=>x.id!==id); localStorage.setItem(LS_KEY, JSON.stringify(s)); renderManage(); } })); }
+renderManage();
+</script></body></html>

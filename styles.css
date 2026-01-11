@@ -1,0 +1,71 @@
+/* Budget Tracker Final - Dark Stylish Theme with animated gradient */
+:root{
+  --bg1:#385e9b; --bg2:#07132a; --accent:#2f80ed; --accent2:#7c3aed; --muted:#94a3b8; --card: rgba(255,255,255,0.03);
+  --glass: rgba(255,255,255,0.03);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial; color:#e6eef6;
+  background: linear-gradient(120deg, rgba(10,24,50,1), rgba(8,12,30,1));
+  overflow-y: auto;
+}
+
+/* animated gradient overlay */
+body::before{
+  content:"";
+  position:fixed; inset:0; z-index:-2;
+  background: linear-gradient(45deg, rgba(47,128,237,0.12), rgba(124,58,237,0.08), rgba(14,165,164,0.06));
+  background-size: 600% 600%;
+  animation: hue 18s linear infinite;
+  opacity:0.9;
+}
+@keyframes hue{ 0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%} }
+
+.topbar{height:64px;background:transparent;display:flex;align-items:center;justify-content:space-between;padding:0 20px;position:sticky;top:0;backdrop-filter: blur(6px);border-bottom:1px solid rgba(255,255,255,0.02)}
+.brand{font-weight:700;color:#fff}
+.navlinks a{color:#cfe8ff;text-decoration:none;margin-left:14px;padding:8px 10px;border-radius:8px}
+.navlinks a.active{background:rgba(255,255,255,0.03);color:#fff}
+
+/* layout */
+.container{display:flex;gap:24px;max-width:1200px;margin:28px auto;padding:0 20px}
+.sidebar{width:320px}
+.main{flex:1}
+.card{background:var(--card);border-radius:12px;padding:18px;margin-bottom:18px;box-shadow:0 8px 24px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.02)}
+.single{max-width:900px;margin:28px auto}
+
+/* form styles */
+label{display:block;margin-bottom:10px;font-size:14px;color:var(--muted)}
+input,textarea,select{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;margin-top:6px;font-size:14px}
+textarea{min-height:90px;resize:vertical}
+.form-row{display:flex;gap:8px;margin-top:10px}
+button{padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
+button.primary{background:linear-gradient(90deg,var(--accent),var(--accent2));color:white}
+button.muted{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
+
+/* metrics & lists */
+.metrics{display:flex;gap:12px;margin-top:12px}
+.metrics>div{flex:1;background:linear-gradient(180deg,rgba(232, 205, 32, 0.02),rgba(255,255,255,0.01));padding:12px;border-radius:8px;text-align:center}
+.big-num{font-weight:700;font-size:18px;margin-top:6px}
+.income{color:#27b82e}.expense{color:#ee3e59}
+.tx-list{list-style:none;padding:0;margin:0}
+.tx-list li{display:flex;justify-content:space-between;padding:10px 6px;border-bottom:1px solid rgba(255,255,255,0.02);cursor:pointer}
+.meta{font-size:12px;color:var(--muted)}
+
+/* footer */
+.footer{max-width:1200px;margin:12px auto;padding:16px 20px;color:#94a3b8;font-size:13px}
+.footer-container{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.footer-links ul{list-style:none;padding:0;margin:0}
+.footer-links a{color:#cfe8ff;text-decoration:none}
+
+/* chat bubble */
+#chatButton{position:fixed;right:22px;bottom:22px;width:56px;height:56px;border-radius:50%;background:linear-gradient(90deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;box-shadow:0 8px 30px rgba(47,128,237,0.18);z-index:60}
+#chatWindow{position:fixed;right:22px;bottom:90px;width:320px;border-radius:12px;background:linear-gradient(180deg,rgba(10,14,26,0.98),rgba(8,12,20,0.98));box-shadow:0 14px 40px rgba(2,6,23,0.7);overflow:hidden;z-index:61;display:none;flex-direction:column}
+#chatWindow .chat-header{display:flex;justify-content:space-between;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.02);color:#e6eef6}
+.chat-history{padding:10px 12px;max-height:220px;overflow:auto;color:#dbeafe;font-size:14px}
+.chat-input{display:flex;gap:8px;padding:10px;background:transparent;border-top:1px solid rgba(255,255,255,0.02)}
+.chat-input input{flex:1;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+.chat-input button{padding:8px 10px;border-radius:8px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border:none}
+
+/* responsive */
+@media(max-width:920px){ .container{flex-direction:column}.sidebar{width:auto} #chatWindow{right:12px;left:12px;width:auto} }

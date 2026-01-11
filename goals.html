@@ -1,0 +1,10 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Budget Goals - Budget Tracker</title><link rel="stylesheet" href="css/styles.css" /></head><body>
+<header class="topbar"><div class="brand">Budget Tracker</div><nav><a href="index.html">Home</a><a href="manage.html">Manage Expenses</a><a href="goals.html" class="active">Budget Goals</a></nav></header>
+<main class="single container"><div class="card"><h1>Budget Goals</h1><form id="goalsForm"><label>Monthly Goal (₹)<input id="goalAmount" type="number" /></label><label>Notes<textarea id="goalNotes"></textarea></label><div class="form-row"><button type="button" id="saveGoal" class="primary">Save Goal</button><button type="button" id="resetGoal" class="muted">Reset</button></div></form><div id="goalPreview" style="margin-top:16px"></div></div></main><footer class="footer small"><p>© 2025 Budget Tracker</p></footer>
+<script>
+const GOAL_KEY='bt_goal_final';
+function loadGoal(){ const raw=localStorage.getItem(GOAL_KEY); if(raw){ const o=JSON.parse(raw); document.getElementById('goalAmount').value=o.amount||''; document.getElementById('goalNotes').value=o.notes||''; document.getElementById('goalPreview').innerHTML='<strong>Monthly Goal: ₹'+o.amount+'</strong><p>'+o.notes+'</p>'; } }
+document.getElementById('saveGoal').addEventListener('click', ()=>{ const o={amount:document.getElementById('goalAmount').value, notes:document.getElementById('goalNotes').value}; localStorage.setItem(GOAL_KEY, JSON.stringify(o)); loadGoal(); alert('Saved'); });
+document.getElementById('resetGoal').addEventListener('click', ()=>{ localStorage.removeItem(GOAL_KEY); loadGoal(); });
+loadGoal();
+</script></body></html>
